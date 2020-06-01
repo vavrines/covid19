@@ -3,8 +3,8 @@ import numpy as np
 
 
 def load_individual_timeseries(name):
-    base_url='https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series'
-    url = f'{base_url}/time_series_19-covid-{name}.csv' # confirmed
+    base_url='https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data/csse_covid_19_time_series'
+    url = f'{base_url}/time_series_covid19_{name}_global.csv' # confirmed
     df = pd.read_csv(url, 
                      index_col=['Country/Region', 'Province/State', 'Lat', 'Long'])
     df['type'] = name.lower()
@@ -35,7 +35,7 @@ def load_individual_timeseries(name):
 
 
 def load_data(drop_states=False, p_crit=.05, filter_n_days_100=None):
-    df = load_individual_timeseries('Confirmed')
+    df = load_individual_timeseries('confirmed')
     df = df.rename(columns={'cases': 'confirmed'})
     if drop_states:
         # Drop states for simplicity
